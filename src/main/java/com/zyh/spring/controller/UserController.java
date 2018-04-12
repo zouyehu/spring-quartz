@@ -25,4 +25,11 @@ public class UserController {
         System.out.println("这是第二个任务执行-----");
         System.out.println(System.currentTimeMillis());
     }
+
+    @ResponseBody
+    @RequestMapping(value = "testJob3", method = RequestMethod.GET)
+    public void testJob3(){
+        System.out.println("这是第三个任务执行-----");
+        System.out.println(System.currentTimeMillis());
+    }
 }
