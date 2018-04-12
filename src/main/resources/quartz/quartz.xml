@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 配置quartz调度器 -->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!--可选，QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了 -->
+        <property name="overwriteExistingJobs" value="true" />
+        <!--必须的，QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动 -->
+        <property name="startupDelay" value="3" />
+        <!-- 设置自动启动 -->
+        <property name="autoStartup" value="true" />
+        <!-- 把spring上下 文以key/value的方式存放在了quartz的上下文中了 -->
+        <property name="applicationContextSchedulerContextKey" value="applicationContext" />
+        <!-- scheduler的名称 -->
+        <property name="schedulerName" value="ClusterScheduler" />
+        <property name="configLocation" value="classpath:properties/quartz.properties" />
+    </bean>
+</beans>
